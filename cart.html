@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qnect 장바구니</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>장바구니</h1>
+        <button onclick="location.href='index.html'" class="back-btn">메뉴로 돌아가기</button>
+    </header>
+    
+    <main>
+        <div id="cart-items">
+            <!-- 자바스크립트로 장바구니 아이템 표시 -->
+        </div>
+        
+        <div id="cart-summary">
+            <div class="total">총 주문금액: <span id="total-price">0원</span></div>
+            <button id="order-btn" onclick="placeOrder()">주문하기</button>
+        </div>
+    </main>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            displayCart();
+        });
+        
+        function displayCart() {
+            const cartContainer = document.getElementById('cart-items');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            if (cart.length === 0) {
+                cartContainer.innerHTML = '<p class="empty-cart">장바구니가 비어있습니다.</p>';
+                document.getElementById('total-price').textContent = '0원';
+                return;
+            }
+            
+            let html = '';
+            let total = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                html += `
+                    <div class="cart-item">
+                        <div class="item-info">
+                            <h3>${item.name}</h3>
+                            <p>${item.price.toLocaleString()}원 x ${item.quantity}</p>
+                        </div>
+                        <div class="item-actions">
+                            <div class="quantity-control">
+                                <button onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                                <span>${item.quantity}</span>
+                                <button onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                            </div>
+                            <p class="item-total">${itemTotal.toLocaleString()}원</p>
+                            <button class="remove-btn" onclick="removeItem(${item.id})">삭제</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cartContainer.innerHTML = html;
+            document.getElementById('total-price').textContent = total.toLocaleString() + '원';
+        }
+        
+        function updateQuantity(itemId, newQuantity) {
+            if (newQuantity < 1) return;
+            
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const itemIndex = cart.findIndex(item => item.id === itemId);
+            
+            if (itemIndex !== -1) {
+                cart[itemIndex].quantity = newQuantity;
+                localStorage.setItem('cart', JSON.stringify(cart));
+                displayCart();
+            }
+        }
+        
+        function removeItem(itemId) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const updatedCart = cart.filter(item => item.id !== itemId);
+            localStorage.setItem('cart', JSON.stringify(updatedCart));
+            displayCart();
+        }
+        
+        function placeOrder() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            if (cart.length === 0) {
+                alert('장바구니가 비어있습니다.');
+                return;
+            }
+            
+            // 주문 정보 저장
+            const orderData = {
+                items: cart,
+                tableNumber: cart[0].tableNumber,
+                orderTime: new Date().toISOString(),
+                totalAmount: cart.reduce((total, item) => total + (item.price * item.quantity), 0)
+            };
+            
+            localStorage.setItem('currentOrder', JSON.stringify(orderData));
+            
+            // 구글 폼에 주문 데이터 전송 (실제 구현에서는 서버로 전송)
+            // 여기서는 주문 확인 페이지로 이동
+            window.location.href = 'order.html';
+        }
+    </script>
+</body>
+</html>

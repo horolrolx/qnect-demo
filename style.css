@@ -1,0 +1,233 @@
+/* 기본 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #3a86ff;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+main {
+    padding: 1rem;
+    margin-bottom: 60px;
+}
+
+/* 메뉴 카테고리 */
+.menu-categories {
+    display: flex;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    gap: 0.5rem;
+}
+
+.category-btn {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.category-btn.active {
+    background-color: #3a86ff;
+    color: white;
+    border-color: #3a86ff;
+}
+
+/* 메뉴 아이템 */
+.menu-items {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.menu-item {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu-image img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.menu-details {
+    padding: 1rem;
+}
+
+.menu-details h3 {
+    margin-bottom: 0.5rem;
+}
+
+.price {
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+button {
+    background-color: #3a86ff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#view-cart {
+    width: 80%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 8px;
+}
+
+/* 장바구니 스타일 */
+.cart-item {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.item-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.item-total {
+    font-weight: bold;
+}
+
+#cart-summary {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.total {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+#order-btn {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    background-color: #4caf50;
+}
+
+.back-btn {
+    margin-top: 0.5rem;
+    background-color: transparent;
+    border: 1px solid white;
+}
+
+/* 주문 확인 페이지 */
+.order-confirmation {
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.success-icon {
+    font-size: 5rem;
+    color: #4caf50;
+    margin: 1rem 0;
+}
+
+.order-details {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    text-align: left;
+}
+
+#ordered-items {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    text-align: left;
+}
+
+#ordered-items ul {
+    list-style-type: none;
+    margin-top: 0.5rem;
+}
+
+#ordered-items li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.order-total {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+.primary-btn {
+    background-color: #3a86ff;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+}
+
+/* 반응형 디자인 */
+@media (min-width: 768px) {
+    .menu-items {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    main {
+        max-width: 1200px;
+        margin: 0 auto 60px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .menu-items {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

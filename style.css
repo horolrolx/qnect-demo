@@ -741,7 +741,7 @@ h1 {
     100% { opacity: 0; }
 }
 
-/* 챗봇 스타일 */
+/* 챗봇 스타일 수정 */
 .chatbot-container {
     position: fixed;
     bottom: 20px;
@@ -753,6 +753,14 @@ h1 {
     z-index: 1000;
     overflow: hidden;
     transition: all 0.3s ease;
+}
+
+.chatbot-container.collapsed {
+    height: 50px;
+}
+
+.chatbot-container.collapsed .chatbot-body {
+    display: none;
 }
 
 .chatbot-header {
@@ -876,4 +884,59 @@ footer {
     background-color: white;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
     z-index: 100;
+}
+
+/* 모바일 환경에서의 챗봇 스타일 */
+@media screen and (max-width: 768px) {
+    .chatbot-container {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+    }
+
+    .chatbot-container.active {
+        transform: translateY(0);
+    }
+
+    .chatbot-container.collapsed {
+        height: 60px;
+        transform: translateY(calc(100% - 60px));
+    }
+
+    .chatbot-container.collapsed .chatbot-body {
+        display: none;
+    }
+
+    .chatbot-header {
+        height: 60px;
+        padding: 0 20px;
+    }
+
+    .chatbot-body {
+        height: calc(100% - 60px);
+    }
+
+    .chat-messages {
+        padding: 20px;
+    }
+
+    .chat-input {
+        padding: 15px;
+    }
+
+    .chat-input input {
+        padding: 12px 15px;
+        font-size: 1rem;
+    }
+
+    .chat-input button {
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
 }

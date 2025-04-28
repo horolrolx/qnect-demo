@@ -157,16 +157,52 @@ function showAddToCartMessage(itemName) {
     }, 2000);
 }
 
-// 챗봇 관련 함수들
+// 챗봇 관련 함수들 수정
 function toggleChatbot() {
     const chatbot = document.querySelector('.chatbot-container');
-    chatbot.classList.toggle('collapsed');
-    if (chatbot.classList.contains('collapsed')) {
-        chatbot.style.height = '50px';
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+        chatbot.classList.toggle('active');
+        chatbot.classList.toggle('collapsed');
     } else {
-        chatbot.style.height = 'auto';
+        chatbot.classList.toggle('collapsed');
+        if (chatbot.classList.contains('collapsed')) {
+            chatbot.style.height = '50px';
+        } else {
+            chatbot.style.height = 'auto';
+        }
     }
 }
+
+// 모바일 환경에서 챗봇 외부 클릭 시 닫기
+document.addEventListener('click', function(event) {
+    const chatbot = document.querySelector('.chatbot-container');
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile && chatbot.classList.contains('active')) {
+        const isClickInside = chatbot.contains(event.target);
+        if (!isClickInside) {
+            chatbot.classList.remove('active');
+            chatbot.classList.add('collapsed');
+        }
+    }
+});
+
+// 화면 크기 변경 시 챗봇 상태 초기화
+window.addEventListener('resize', function() {
+    const chatbot = document.querySelector('.chatbot-container');
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+        chatbot.classList.remove('active');
+        chatbot.classList.add('collapsed');
+    } else {
+        chatbot.classList.remove('active');
+        chatbot.classList.remove('collapsed');
+        chatbot.style.height = 'auto';
+    }
+});
 
 function sendMessage() {
     const input = document.getElementById('chat-input');

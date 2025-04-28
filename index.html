@@ -3,18 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qnect 메뉴</title>
+    <title>맛있는 식당 - Qnect</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Qnect 메뉴 주문</h1>
+        <h1>맛있는 식당</h1>
         <div id="table-info">테이블 번호: <span id="table-number">1</span></div>
     </header>
+    
+    <div class="restaurant-banner">
+        <img src="images/restaurant-banner.jpg" alt="맛있는 식당">
+    </div>
+    
+    <nav class="tabs">
+        <a href="#" class="tab active">메뉴</a>
+        <a href="restaurant.html" class="tab">매장 정보</a>
+        <a href="reviews.html" class="tab">리뷰</a>
+    </nav>
     
     <main>
         <div class="menu-categories">
             <button class="category-btn active" data-category="all">전체</button>
+            <button class="category-btn" data-category="signature">시그니처</button>
             <button class="category-btn" data-category="main">메인</button>
             <button class="category-btn" data-category="side">사이드</button>
             <button class="category-btn" data-category="drink">음료</button>

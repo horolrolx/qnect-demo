@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메뉴 상세 - 맛있는 식당</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>맛있는 식당</h1>
+        <button onclick="location.href='index.html'" class="back-btn">메뉴로 돌아가기</button>
+    </header>
+    
+    <main class="menu-detail">
+        <div id="menu-detail-container">
+            <!-- 자바스크립트로 메뉴 상세 정보 표시 -->
+        </div>
+        
+        <div class="action-buttons">
+            <button class="secondary-btn" onclick="location.href='index.html'">다른 메뉴 보기</button>
+            <button class="primary-btn" id="add-to-cart-btn">장바구니에 담기</button>
+        </div>
+    </main>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // URL에서 메뉴 ID 가져오기
+            const urlParams = new URLSearchParams(window.location.search);
+            const menuId = parseInt(urlParams.get('id'));
+            
+            if (!menuId) {
+                location.href = 'index.html';
+                return;
+            }
+            
+            // 메뉴 데이터 가져오기 - 실제로는 외부 파일에서 불러와야 함
+            const menuItems = [
+                { 
+                    id: 1, 
+                    name: "시그니처 버거", 
+                    price: 12000, 
+                    category: "signature", 
+                    image: "burger-signature.jpg", 
+                    description: "매장 특제 소스와 신선한 재료로 만든 최고의 버거",
+                    ingredients: "소고기 패티, 베이컨, 치즈, 토마토, 양상추, 특제 소스",
+                    calories: 750,
+                    ratings: 4.8,
+                    reviewCount: 128
+                },
+                { 
+                    id: 2, 
+                    name: "더블 치즈 버거", 
+                    price: 10000, 
+                    category: "main", 
+                    image: "burger-cheese.jpg", 
+                    description: "두 장의 패티와 풍부한 치즈의 조화",
+                    ingredients: "소고기 패티 2장, 체다 치즈, 피클, 양파, 토마토 소스",
+                    calories: 820,
+                    ratings: 4.6,
+                    reviewCount: 95
+                },
+                { 
+                    id: 3, 
+                    name: "트러플 감자튀김", 
+                    price: 6000, 
+                    category: "side", 
+                    image: "fries-truffle.jpg", 
+                    description: "트러플 오일과 파마산 치즈를 곁들인 프리미엄 감자튀김",
+                    ingredients: "감자, 트러플 오일, 파마산 치즈, 파슬리, 소금",
+                    calories: 450,
+                    ratings: 4.7,
+                    reviewCount: 86
+                },
+                { 
+                    id: 4, 
+                    name: "수제 레몬에이드", 
+                    price: 5000, 
+                    category: "drink", 
+                    image: "lemonade.jpg", 
+                    description: "신선한 레몬으로 만든 상큼한 레몬에이드",
+                    ingredients: "레몬, 설탕, 탄산수, 민트",
+                    calories: 180,
+                    ratings: 4.5,
+                    reviewCount: 62
+                },
+                { 
+                    id: 5, 
+                    name: "아보카도 샐러드", 
+                    price: 9000, 
+                    category: "side", 
+                    image: "salad-avocado.jpg", 
+                    description: "신선한 아보카도와 다양한 채소로 만든 건강한 샐러드",
+                    ingredients: "아보카도, 방울토마토, 양상추, 적양파, 올리브 오일",
+                    calories: 320,
+                    ratings: 4.4,
+                    reviewCount: 73
+                }
+            ];
+            
+            const menuItem = menuItems.find(item => item.id === menuId);
+            
+            if (!menuItem) {
+                location.href = 'index.html';
+                return;
+            }
+            
+            // 페이지 제목 업데이트
+            document.title = `${menuItem.name} - 맛있는 식당`;
+            
+            // 메뉴 상세 정보 표시
+            const detailContainer = document.getElementById('menu-detail-container');
+            detailContainer.innerHTML = `
+                <div class="menu-detail-image">
+                    <img src="images/${menuItem.image}" alt="${menuItem.name}" onerror="this.src='images/placeholder.jpg'">
+                </div>
+                <div class="menu-detail-info">
+                    <h2>${menuItem.name}</h2>
+                    <div class="rating">★ ${menuItem.ratings.toFixed(1)} (${menuItem.reviewCount})</div>
+                    <p class="price">${menuItem.price.toLocaleString()}원</p>
+                    <p class="description">${menuItem.description}</p>
+                    
+                    <div class="info-group">
+                        <h3>원재료</h3>
+                        <p>${menuItem.ingredients}</p>
+                    </div>
+                    
+                    <div class="info-group">
+                        <h3>영양정보</h3>
+                        <p>열량: ${menuItem.calories} kcal</p>
+                    </div>
+                </div>
+            `;
+            
+            // 장바구니 담기 버튼
+            document.getElementById('add-to-cart-btn').addEventListener('click', function() {
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const tableNumber = localStorage.getItem('tableNumber') || '1';
+                
+                const existingItem = cart.find(cartItem => cartItem.id === menuItem.id);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id: menuItem.id,
+                        name: menuItem.name,
+                        price: menuItem.price,
+                        quantity: 1,
+                        tableNumber: tableNumber
+                    });
+                }
+                
+                localStorage.setItem('cart', JSON.stringify(cart));
+                alert(`${menuItem.name}이(가) 장바구니에 추가되었습니다.`);
+                
+                // 선택사항: 장바구니 페이지로 이동
+                // location.href = 'cart.html';
+            });
+        });
+    </script>
+</body>
+</html>

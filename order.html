@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qnect 주문 완료</title>
+    <title>주문 완료 - 맛있는 식당</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,6 +19,7 @@
             <p>테이블 번호: <span id="order-table"></span></p>
             <p>주문 시간: <span id="order-time"></span></p>
             <p>주문 번호: <span id="order-id"></span></p>
+            <p>결제 방법: <span id="payment-method"></span></p>
         </div>
         
         <div id="ordered-items">
@@ -26,7 +27,12 @@
         </div>
         
         <div class="order-total">
-            <p>총 금액: <span id="order-total"></span></p>
+            <p>총 결제 금액: <span id="order-total"></span></p>
+        </div>
+        
+        <div class="info-message">
+            <p>주문하신 음식이 준비되면 알려드리겠습니다.</p>
+            <p>맛있게 드세요!</p>
         </div>
         
         <button onclick="location.href='index.html'" class="primary-btn">메뉴로 돌아가기</button>
@@ -34,43 +40,69 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            displayOrderConfirmation();
-        });
-        
-        function displayOrderConfirmation() {
-            const orderData = JSON.parse(localStorage.getItem('currentOrder'));
+            // 결제 성공 여부 확인
+            const paymentSuccess = localStorage.getItem('paymentSuccess');
             
-            if (!orderData) {
-                window.location.href = 'index.html';
+            if (!paymentSuccess) {
+                location.href = 'index.html';
                 return;
             }
             
+            displayOrderConfirmation();
+            
+            // 새로운 주문 시작을 위해 장바구니 비우기
+            localStorage.removeItem('cart');
+            localStorage.removeItem('orderTotal');
+            localStorage.removeItem('paymentSuccess');
+        });
+        
+        function displayOrderConfirmation() {
+            const cart = JSON.parse(localStorage.getItem('currentOrder')) || [];
+            const total = localStorage.getItem('orderTotal') || 0;
+            const paymentMethod = localStorage.getItem('paymentMethod') || 'unknown';
+            
             // 주문 정보 표시
-            document.getElementById('order-table').textContent = orderData.tableNumber;
-            document.getElementById('order-time').textContent = new Date(orderData.orderTime).toLocaleString();
+            document.getElementById('order-table').textContent = cart.tableNumber || '1';
+            document.getElementById('order-time').textContent = new Date().toLocaleString();
             document.getElementById('order-id').textContent = generateOrderId();
-            document.getElementById('order-total').textContent = orderData.totalAmount.toLocaleString() + '원';
+            document.getElementById('order-total').textContent = parseInt(total).toLocaleString() + '원';
+            document.getElementById('payment-method').textContent = getPaymentMethodName(paymentMethod);
             
             // 주문 항목 표시
             const itemsContainer = document.getElementById('ordered-items');
-            let html = '<h3>주문 항목</h3><ul>';
+            let html = '<h3>주문 항목</h3><ul class="order-items-list">';
             
-            orderData.items.forEach(item => {
-                html += `<li>${item.name} x ${item.quantity} = ${(item.price * item.quantity).toLocaleString()}원</li>`;
+            const orderItems = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            orderItems.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                html += `
+                    <li class="order-item">
+                        <span class="item-name">${item.name} x ${item.quantity}</span>
+                        <span class="item-price">${itemTotal.toLocaleString()}원</span>
+                    </li>
+                `;
             });
             
             html += '</ul>';
             itemsContainer.innerHTML = html;
-            
-            // 장바구니 비우기
-            localStorage.removeItem('cart');
-            
-            // 구글 시트에 주문 데이터 전송 (선택사항)
-            // sendOrderToGoogleSheet(orderData);
         }
         
         function generateOrderId() {
             return Math.floor(100000 + Math.random() * 900000);
+        }
+        
+        function getPaymentMethodName(method) {
+            const methods = {
+                'cash': '현금 결제',
+                'card-offline': '카드 결제 (현장)',
+                'card-online': '신용/체크카드',
+                'kakao-pay': '카카오페이',
+                'naver-pay': '네이버페이',
+                'toss': '토스'
+            };
+            
+            return methods[method] || '온라인 결제';
         }
     </script>
 </body>

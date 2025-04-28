@@ -1,44 +1,197 @@
-/* 기본 스타일 */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Noto Sans KR', sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
-    line-height: 1.6;
-}
-
-header {
-    background-color: #3a86ff;
-    color: white;
-    padding: 1rem;
-    text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-footer {
-    position: fixed;
-    bottom: 0;
+/* 레스토랑 배너 */
+.restaurant-banner {
     width: 100%;
-    background-color: white;
-    padding: 1rem;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    height: 180px;
+    overflow: hidden;
+    margin-bottom: 1rem;
 }
 
-main {
+.restaurant-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 탭 메뉴 */
+.tabs {
+    display: flex;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 1rem;
+}
+
+.tab {
+    flex: 1;
+    text-align: center;
+    padding: 1rem;
+    color: #666;
+    text-decoration: none;
+}
+
+.tab.active {
+    color: #3a86ff;
+    border-bottom: 2px solid #3a86ff;
+    font-weight: bold;
+}
+
+/* 메뉴 상세 페이지 */
+.menu-detail {
     padding: 1rem;
     margin-bottom: 60px;
 }
 
-/* 메뉴 카테고리 */
-.menu-categories {
+.menu-detail-image {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.menu-detail-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.menu-detail-info {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu-detail-info h2 {
+    margin-bottom: 0.5rem;
+}
+
+.menu-detail-info .price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+.menu-detail-info .description {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.info-group {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.info-group h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #666;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.action-buttons button {
+    flex: 1;
+    padding: 1rem;
+}
+
+.secondary-btn {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+/* 레스토랑 정보 페이지 */
+.restaurant-info {
+    padding: 1rem;
+}
+
+.rating-overview {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.stars {
+    color: #f8ce0b;
+    margin-right: 0.5rem;
+}
+
+.score {
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.reviews-count {
+    color: #666;
+}
+
+.info-section {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-section h3 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.info-list {
+    list-style: none;
+}
+
+.info-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.map-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+.map-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 리뷰 페이지 */
+.reviews-container {
+    padding: 1rem;
+}
+
+.rating-summary {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.rating-big {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.stars-big {
+    color: #f8ce0b;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.review-filters {
     display: flex;
     overflow-x: auto;
     margin-bottom: 1rem;
@@ -46,126 +199,195 @@ main {
     gap: 0.5rem;
 }
 
-.category-btn {
+.filter-btn {
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 20px;
     padding: 0.5rem 1rem;
     white-space: nowrap;
-    cursor: pointer;
 }
 
-.category-btn.active {
+.filter-btn.active {
     background-color: #3a86ff;
     color: white;
     border-color: #3a86ff;
 }
 
-/* 메뉴 아이템 */
-.menu-items {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-}
-
-.menu-item {
+.review-item {
     background-color: white;
     border-radius: 8px;
-    overflow: hidden;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.menu-image img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-}
-
-.menu-details {
-    padding: 1rem;
-}
-
-.menu-details h3 {
+.review-header {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 0.5rem;
 }
 
-.price {
+.reviewer {
     font-weight: bold;
-    margin: 0.5rem 0;
 }
 
-button {
+.review-date {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.review-rating {
+    color: #f8ce0b;
+    margin-bottom: 0.5rem;
+}
+
+.review-content {
+    margin-bottom: 1rem;
+}
+
+.review-photos {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+}
+
+.review-photos img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.write-review-btn {
+    width: 100%;
     background-color: #3a86ff;
     color: white;
     border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-#view-cart {
-    width: 80%;
-    padding: 0.75rem;
-    font-size: 1rem;
-    border-radius: 8px;
-}
-
-/* 장바구니 스타일 */
-.cart-item {
-    background-color: white;
-    border-radius: 8px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.item-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 0.5rem;
-}
-
-.quantity-control {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.item-total {
-    font-weight: bold;
-}
-
-#cart-summary {
-    background-color: white;
     padding: 1rem;
     border-radius: 8px;
     margin-top: 1rem;
+    cursor: pointer;
+}
+
+/* 결제 페이지 */
+.payment-container {
+    padding: 1rem;
+    margin-bottom: 60px;
+}
+
+.order-summary {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.total {
-    font-size: 1.2rem;
-    font-weight: bold;
+.order-summary h2 {
     margin-bottom: 1rem;
 }
 
-#order-btn {
+.order-items-list {
+    list-style: none;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.total-amount {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid #eee;
+    text-align: right;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.payment-methods {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.payment-methods h2 {
+    margin-bottom: 1rem;
+}
+
+.payment-method-group {
+    margin-bottom: 1.5rem;
+}
+
+.payment-method-group h3 {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.payment-options {
+    padding-left: 1rem;
+}
+
+.payment-option {
+    margin-bottom: 0.5rem;
+}
+
+.payment-option label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.payment-logo {
+    height: 20px;
+    margin-right: 0.5rem;
+}
+
+.payment-form {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.form-group input {
     width: 100%;
     padding: 0.75rem;
-    font-size: 1rem;
-    background-color: #4caf50;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
-.back-btn {
-    margin-top: 0.5rem;
-    background-color: transparent;
-    border: 1px solid white;
+.form-row {
+    display: flex;
+    gap: 1rem;
 }
 
-/* 주문 확인 페이지 */
+.form-row .form-group {
+    flex: 1;
+}
+
+/* 주문 완료 페이지 */
 .order-confirmation {
     text-align: center;
+    padding: 1.5rem;
     max-width: 500px;
     margin: 0 auto;
 }
@@ -176,58 +398,53 @@ button {
     margin: 1rem 0;
 }
 
-.order-details {
-    background-color: white;
-    border-radius: 8px;
+.info-message {
+    margin: 1.5rem 0;
     padding: 1rem;
-    margin: 1rem 0;
-    text-align: left;
-}
-
-#ordered-items {
-    background-color: white;
+    background-color: #f0f7ff;
     border-radius: 8px;
+    color: #3a86ff;
+}
+
+.rating-container {
+    margin-top: 2rem;
     padding: 1rem;
-    margin: 1rem 0;
-    text-align: left;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: none;
 }
 
-#ordered-items ul {
-    list-style-type: none;
-    margin-top: 0.5rem;
-}
-
-#ordered-items li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #eee;
-}
-
-.order-total {
-    font-size: 1.2rem;
-    font-weight: bold;
+.rating-stars {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
     margin: 1rem 0;
 }
 
-.primary-btn {
-    background-color: #3a86ff;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
+.star-btn {
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: #ddd;
+    cursor: pointer;
 }
 
-/* 반응형 디자인 */
-@media (min-width: 768px) {
-    .menu-items {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    main {
-        max-width: 1200px;
-        margin: 0 auto 60px;
-    }
+.star-btn.active {
+    color: #f8ce0b;
 }
 
-@media (min-width: 1024px) {
-    .menu-items {
-        grid-template-columns: repeat(3, 1fr);
-    }
+/* 메뉴 아이템 수정 */
+.menu-item .rating {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.menu-image {
+    position: relative;
 }

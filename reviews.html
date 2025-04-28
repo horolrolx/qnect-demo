@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리뷰 - 맛있는 식당</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>맛있는 식당</h1>
+        <button onclick="location.href='index.html'" class="back-btn">메뉴로 돌아가기</button>
+    </header>
+    
+    <div class="restaurant-banner">
+        <img src="images/restaurant-banner.jpg" alt="맛있는 식당">
+    </div>
+    
+    <nav class="tabs">
+        <a href="index.html" class="tab">메뉴</a>
+        <a href="restaurant.html" class="tab">매장 정보</a>
+        <a href="#" class="tab active">리뷰</a>
+    </nav>
+    
+    <main class="reviews-container">
+        <div class="rating-summary">
+            <div class="rating-big">4.6</div>
+            <div class="stars-big">★★★★☆</div>
+            <div class="reviews-count">총 237개 리뷰</div>
+        </div>
+        
+        <div class="review-filters">
+            <button class="filter-btn active">최신순</button>
+            <button class="filter-btn">평점 높은순</button>
+            <button class="filter-btn">평점 낮은순</button>
+        </div>
+        
+        <div class="reviews-list">
+            <div class="review-item">
+                <div class="review-header">
+                    <div class="reviewer">김OO</div>
+                    <div class="review-date">2023-12-15</div>
+                </div>
+                <div class="review-rating">★★★★★ 5.0</div>
+                <div class="review-content">
+                    <p>시그니처 버거가 정말 맛있었어요! 특제 소스의 비결이 궁금할 정도로 맛있었습니다. 다음에도 꼭 방문할게요.</p>
+                </div>
+                <div class="review-photos">
+                    <img src="images/review-photo1.jpg" alt="리뷰 사진">
+                </div>
+            </div>
+            
+            <div class="review-item">
+                <div class="review-header">
+                    <div class="reviewer">이OO</div>
+                    <div class="review-date">2023-12-10</div>
+                </div>
+                <div class="review-rating">★★★★☆ 4.0</div>
+                <div class="review-content">
+                    <p>전체적으로 맛은 좋았지만, 가격이 조금 비싼 감이 있어요. 하지만 재료가 신선하고 양도 충분해서 만족했습니다.</p>
+                </div>
+            </div>
+            
+            <div class="review-item">
+                <div class="review-header">
+                    <div class="reviewer">박OO</div>
+                    <div class="review-date">2023-12-05</div>
+                </div>
+                <div class="review-rating">★★★★★ 5.0</div>
+                <div class="review-content">
+                    <p>트러플 감자튀김이 정말 맛있어요! 다른 곳과는 차원이 다른 맛입니다. QR 주문 시스템도 편리하고 좋네요.</p>
+                </div>
+                <div class="review-photos">
+                    <img src="images/review-photo2.jpg" alt="리뷰 사진">
+                    <img src="images/review-photo3.jpg" alt="리뷰 사진">
+                </div>
+            </div>
+        </div>
+        
+        <button class="write-review-btn">리뷰 작성하기</button>
+    </main>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.write-review-btn').addEventListener('click', function() {
+                alert('리뷰 작성은 발표용 데모에서는 지원하지 않습니다.');
+            });
+        });
+    </script>
+</body>
+</html>

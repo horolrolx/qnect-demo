@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>결제 - 맛있는 식당</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>결제하기</h1>
+        <button onclick="location.href='cart.html'" class="back-btn">장바구니로 돌아가기</button>
+    </header>
+    
+    <main class="payment-container">
+        <div class="order-summary">
+            <h2>주문 내역</h2>
+            <div id="order-items">
+                <!-- 자바스크립트로 주문 아이템 표시 -->
+            </div>
+            <div class="total-amount">
+                총 결제금액: <span id="payment-total">0원</span>
+            </div>
+        </div>
+        
+        <div class="payment-methods">
+            <h2>결제 방법 선택</h2>
+            
+            <div class="payment-method-group">
+                <h3>현장 결제</h3>
+                <div class="payment-options">
+                    <div class="payment-option">
+                        <input type="radio" name="payment" id="cash" value="cash">
+                        <label for="cash">현금 결제</label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" name="payment" id="card-offline" value="card-offline">
+                        <label for="card-offline">카드 결제 (직원 요청)</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="payment-method-group">
+                <h3>온라인 결제</h3>
+                <div class="payment-options">
+                    <div class="payment-option">
+                        <input type="radio" name="payment" id="card-online" value="card-online" checked>
+                        <label for="card-online">신용/체크카드</label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" name="payment" id="kakao-pay" value="kakao-pay">
+                        <label for="kakao-pay">
+                            <img src="images/kakao-pay.png" alt="카카오페이" class="payment-logo">
+                            카카오페이
+                        </label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" name="payment" id="naver-pay" value="naver-pay">
+                        <label for="naver-pay">
+                            <img src="images/naver-pay.png" alt="네이버페이" class="payment-logo">
+                            네이버페이
+                        </label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" name="payment" id="toss" value="toss">
+                        <label for="toss">
+                            <img src="images/toss.png" alt="토스" class="payment-logo">
+                            토스
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="card-payment-form" class="payment-form">
+            <h3>카드 정보 입력</h3>
+            <div class="form-group">
+                <label for="card-number">카드번호</label>
+                <input type="text" id="card-number" placeholder="0000-0000-0000-0000">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="expiry-date">유효기간</label>
+                    <input type="text" id="expiry-date" placeholder="MM/YY">
+                </div>
+                <div class="form-group">
+                    <label for="cvv">CVV</label>
+                    <input type="password" id="cvv" placeholder="000">
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button id="pay-button" class="primary-btn">결제하기</button>
+        </div>
+    </main>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 주문 내역 표시
+            displayOrderItems();
+            
+            // 결제 방법 변경 이벤트
+            document.querySelectorAll('input[name="payment"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    toggleCardForm();
+                });
+            });
+            
+            // 결제 버튼 클릭 이벤트
+            document.getElementById('pay-button').addEventListener('click', processPayment);
+            
+            // 초기 폼 상태 설정
+            toggleCardForm();
+        });
+        
+        function displayOrderItems() {
+            const orderItemsContainer = document.getElementById('order-items');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const total = localStorage.getItem('orderTotal') || 0;
+            
+            if (cart.length === 0) {
+                location.href = 'cart.html';
+                return;
+            }
+            
+            let html = '<ul class="order-items-list">';
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                html += `
+                    <li class="order-item">
+                        <span class="item-name">${item.name} x ${item.quantity}</span>
+                        <span class="item-price">${itemTotal.toLocaleString()}원</span>
+                    </li>
+                `;
+            });
+            
+            html += '</ul>';
+            orderItemsContainer.innerHTML = html;
+            document.getElementById('payment-total').textContent = parseInt(total).toLocaleString() + '원';
+        }
+        
+        function toggleCardForm() {
+            const selectedPayment = document.querySelector('input[name="payment"]:checked').value;
+            const cardForm = document.getElementById('card-payment-form');
+            
+            if (selectedPayment === 'card-online') {
+                cardForm.style.display = 'block';
+            } else {
+                cardForm.style.display = 'none';
+            }
+        }
+        
+        function processPayment() {
+            const selectedPayment = document.querySelector('input[name="payment"]:checked').value;
+            
+            // 간단한 입력 검증 (온라인 카드 결제 시)
+            if (selectedPayment === 'card-online') {
+                const cardNumber = document.getElementById('card-number').value;
+                const expiryDate = document.getElementById('expiry-date').value;
+                const cvv = document.getElementById('cvv').value;
+                
+                if (!cardNumber || !expiryDate || !cvv) {
+                    alert('카드 정보를 모두 입력해주세요.');
+                    return;
+                }
+            }
+            
+            // 결제 처리 시뮬레이션 (발표용 데모)
+            simulatePaymentProcessing();
+        }
+        
+        function simulatePaymentProcessing() {
+            const payButton = document.getElementById('pay-button');
+            payButton.disabled = true;
+            payButton.textContent = '결제 처리 중...';
+            
+            // 결제 진행 시간 시뮬레이션 (2초)
+            setTimeout(() => {
+                // 결제 성공 처리 (실패 케이스도 추가 가능)
+                localStorage.setItem('paymentMethod', document.querySelector('input[name="payment"]:checked').value);
+                localStorage.setItem('paymentSuccess', true);
+                
+                // 결제 완료 페이지로 이동
+                location.href = 'order.html';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

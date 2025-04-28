@@ -575,28 +575,63 @@ button:active {
 }
 
 /* 카테고리 버튼 스타일 수정 */
+.menu-categories {
+    display: flex;
+    gap: 0.8rem;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(74, 144, 226, 0.1);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
 .category-btn {
     background-color: white;
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
-    padding: 0.6rem 1.2rem;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: 25px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
     white-space: nowrap;
     cursor: pointer;
-    font-size: 0.9rem;
     transition: all 0.2s ease;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 4px rgba(74, 144, 226, 0.1);
 }
 
 .category-btn.active {
     background-color: var(--primary-color);
     color: white;
     border-color: var(--primary-color);
-    box-shadow: 0 2px 5px rgba(255, 107, 53, 0.3);
+    box-shadow: 0 4px 8px rgba(74, 144, 226, 0.2);
 }
 
 .category-btn:hover:not(.active) {
-    background-color: rgba(74, 144, 226, 0.05);
-    border-color: var(--primary-color);
+    background-color: rgba(74, 144, 226, 0.1);
+    border-color: var(--hover-color);
+    color: var(--hover-color);
+    transform: translateY(-1px);
+}
+
+/* 스크롤바 스타일 수정 */
+.menu-categories::-webkit-scrollbar {
+    height: 6px;
+}
+
+.menu-categories::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.menu-categories::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+
+.menu-categories::-webkit-scrollbar-thumb:hover {
+    background: var(--hover-color);
 }
 
 /* 뒤로가기 버튼 */

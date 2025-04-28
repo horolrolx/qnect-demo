@@ -10,18 +10,50 @@
     --error-color: #E74C3C; /* 에러 메시지용 빨강 */
 }
 
+/* 기본 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     background-color: var(--background-color);
     color: var(--text-color);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.5;
+    padding-bottom: 70px; /* 푸터 높이만큼 여백 */
+}
+
+/* 헤더 스타일 */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.2);
+}
+
+h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+#table-info {
+    font-size: 0.9rem;
+    opacity: 0.9;
 }
 
 /* 레스토랑 배너 */
 .restaurant-banner {
     width: 100%;
-    height: 200px;
+    height: 180px;
     overflow: hidden;
-    margin-bottom: 1.5rem;
-    border-radius: 12px;
+    margin-bottom: 1rem;
 }
 
 .restaurant-banner img {
@@ -34,41 +66,75 @@ body {
 .tabs {
     display: flex;
     background-color: white;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--border-color);
     margin-bottom: 1rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .tab {
     flex: 1;
     text-align: center;
     padding: 1rem;
-    color: #666;
+    color: var(--text-color);
     text-decoration: none;
+    font-size: 0.9rem;
+    white-space: nowrap;
 }
 
 .tab.active {
     color: var(--primary-color);
     border-bottom: 2px solid var(--primary-color);
-    font-weight: bold;
+    font-weight: 600;
 }
 
-.tab:hover:not(.active) {
+/* 메뉴 카테고리 */
+.menu-categories {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.8rem;
+    background-color: white;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.category-btn {
+    background-color: white;
+    border: 2px solid var(--primary-color);
     color: var(--primary-color);
-    background-color: rgba(74, 144, 226, 0.05);
+    border-radius: 20px;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-/* 메뉴 상세 페이지 */
-.menu-detail {
-    padding: 1rem;
-    margin-bottom: 60px;
+.category-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* 메뉴 아이템 */
+.menu-items {
+    padding: 0 1rem;
+}
+
+.menu-item {
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(74, 144, 226, 0.1);
 }
 
 .menu-image {
     width: 100%;
-    height: 180px;
+    height: 200px;
     overflow: hidden;
-    border-radius: 8px;
-    margin-bottom: 1rem;
+    position: relative;
 }
 
 .menu-image img {
@@ -77,68 +143,230 @@ body {
     object-fit: cover;
 }
 
-.menu-detail-image {
-    width: 100%;
-    height: 300px;
-    overflow: hidden;
-    border-radius: 12px;
-    margin-bottom: 1.5rem;
-}
-
-.menu-detail-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.menu-detail-info {
-    background-color: white;
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.menu-detail-info h2 {
-    margin-bottom: 0.5rem;
-}
-
-.menu-detail-info .price {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 1rem 0;
-}
-
-.menu-detail-info .description {
-    color: #666;
-    margin-bottom: 1.5rem;
-}
-
-.info-group {
-    margin-top: 1.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid #eee;
-}
-
-.info-group h3 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-    color: #666;
-}
-
-.action-buttons {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1.5rem;
-}
-
-.action-buttons button {
-    flex: 1;
+.menu-details {
     padding: 1rem;
 }
 
-.secondary-btn {
-    background-color: #f0f0f0;
-    color: #333;
+.menu-details h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.menu-details p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.menu-details .price {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin: 0.5rem 0;
+}
+
+/* 버튼 스타일 */
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    background-color: var(--hover-color);
+}
+
+/* 푸터 */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    background-color: white;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+#view-cart {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* 챗봇 스타일 */
+.chatbot-container {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 1000;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.chatbot-container.active {
+    transform: translateY(0);
+}
+
+.chatbot-container.collapsed {
+    height: 60px;
+    transform: translateY(calc(100% - 60px));
+}
+
+.chatbot-container.collapsed .chatbot-body {
+    display: none;
+}
+
+.chatbot-header {
+    height: 60px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.chatbot-body {
+    height: calc(100% - 60px);
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.message {
+    max-width: 80%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.message.bot {
+    background-color: #f0f4f8;
+    color: var(--text-color);
+    align-self: flex-start;
+}
+
+.message.user {
+    background-color: var(--primary-color);
+    color: white;
+    align-self: flex-end;
+}
+
+.chat-input {
+    padding: 15px;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.chat-input button {
+    padding: 12px 20px;
+    border-radius: 20px;
+    font-size: 1rem;
+}
+
+/* 데스크톱 환경 스타일 */
+@media screen and (min-width: 769px) {
+    body {
+        padding-bottom: 0;
+    }
+
+    .restaurant-banner {
+        height: 250px;
+    }
+
+    .menu-categories {
+        padding: 1rem;
+        gap: 0.8rem;
+    }
+
+    .category-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .menu-items {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .menu-item {
+        margin-bottom: 0;
+    }
+
+    footer {
+        position: static;
+        padding: 1.5rem;
+    }
+
+    #view-cart {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .chatbot-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        left: auto;
+        width: 300px;
+        height: auto;
+        border-radius: 12px;
+        transform: none;
+    }
+
+    .chatbot-container.collapsed {
+        height: 50px;
+    }
+
+    .chatbot-body {
+        height: 400px;
+    }
+
+    .chatbot-header {
+        height: 50px;
+        padding: 12px 16px;
+    }
 }
 
 /* 레스토랑 정보 페이지 */
@@ -702,22 +930,6 @@ button:active {
     background-color: rgba(74, 144, 226, 0.05);
     border-color: var(--primary-color);
     transform: none;
-}
-
-header {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 1rem;
-    text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.2);
-}
-
-h1 {
-    font-weight: 600;
-    letter-spacing: 0.5px;
 }
 
 /* 장바구니 메시지 */

@@ -42,6 +42,25 @@
         </button>
     </footer>
     
+    <!-- 챗봇 UI -->
+    <div class="chatbot-container">
+        <div class="chatbot-header" onclick="toggleChatbot()">
+            <span>메뉴 추천 챗봇</span>
+            <span class="chatbot-toggle">▼</span>
+        </div>
+        <div class="chatbot-body">
+            <div class="chat-messages" id="chat-messages">
+                <div class="message bot">
+                    안녕하세요! 오늘 어떤 메뉴를 찾고 계신가요? 날씨, 기분, 인원 등을 말씀해주시면 맞춤 메뉴를 추천해드릴게요.
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chat-input" placeholder="메시지를 입력하세요...">
+                <button onclick="sendMessage()">전송</button>
+            </div>
+        </div>
+    </div>
+    
     <script src="script.js"></script>
 </body>
 </html>

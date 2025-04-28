@@ -156,3 +156,102 @@ function showAddToCartMessage(itemName) {
         message.remove();
     }, 2000);
 }
+
+// 챗봇 관련 함수들
+function toggleChatbot() {
+    const chatbot = document.querySelector('.chatbot-container');
+    chatbot.classList.toggle('collapsed');
+    if (chatbot.classList.contains('collapsed')) {
+        chatbot.style.height = '50px';
+    } else {
+        chatbot.style.height = 'auto';
+    }
+}
+
+function sendMessage() {
+    const input = document.getElementById('chat-input');
+    const message = input.value.trim();
+    
+    if (message) {
+        addMessage(message, 'user');
+        input.value = '';
+        
+        // 챗봇 응답 생성
+        setTimeout(() => {
+            const response = generateResponse(message);
+            addMessage(response, 'bot');
+        }, 500);
+    }
+}
+
+function addMessage(text, type) {
+    const messagesContainer = document.getElementById('chat-messages');
+    const messageElement = document.createElement('div');
+    messageElement.className = `message ${type}`;
+    messageElement.textContent = text;
+    messagesContainer.appendChild(messageElement);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function generateResponse(message) {
+    // 날씨 관련 키워드
+    const weatherKeywords = ['날씨', '비', '더워', '추워', '맑아'];
+    // 기분 관련 키워드
+    const moodKeywords = ['기분', '행복', '우울', '스트레스', '피곤'];
+    // 인원 관련 키워드
+    const peopleKeywords = ['혼자', '둘이', '세명', '네명', '다섯명'];
+    
+    // 날씨 체크
+    const isWeather = weatherKeywords.some(keyword => message.includes(keyword));
+    // 기분 체크
+    const isMood = moodKeywords.some(keyword => message.includes(keyword));
+    // 인원 체크
+    const isPeople = peopleKeywords.some(keyword => message.includes(keyword));
+    
+    let recommendations = [];
+    
+    // 날씨 기반 추천
+    if (isWeather) {
+        if (message.includes('비')) {
+            recommendations.push('비 오는 날에는 따뜻한 수프나 라면이 좋을 것 같아요.');
+        } else if (message.includes('더워')) {
+            recommendations.push('더운 날에는 시원한 샐러드나 레몬에이드가 좋을 것 같아요.');
+        } else if (message.includes('추워')) {
+            recommendations.push('추운 날에는 따뜻한 버거나 핫도그가 좋을 것 같아요.');
+        }
+    }
+    
+    // 기분 기반 추천
+    if (isMood) {
+        if (message.includes('행복')) {
+            recommendations.push('기분이 좋으시다면 달콤한 디저트나 특별한 메뉴를 추천드려요.');
+        } else if (message.includes('우울') || message.includes('스트레스')) {
+            recommendations.push('기분이 좋지 않으시다면 편안한 음식이나 따뜻한 음료를 추천드려요.');
+        }
+    }
+    
+    // 인원 기반 추천
+    if (isPeople) {
+        if (message.includes('혼자')) {
+            recommendations.push('혼자 드시기 좋은 사이드 메뉴나 음료를 추천드려요.');
+        } else if (message.includes('둘이')) {
+            recommendations.push('두 분이 함께 나누기 좋은 메인 메뉴와 사이드 메뉴를 추천드려요.');
+        } else {
+            recommendations.push('여러 분이 함께 나누기 좋은 메뉴들을 추천드려요.');
+        }
+    }
+    
+    // 기본 응답
+    if (recommendations.length === 0) {
+        return '죄송합니다. 더 자세한 정보를 알려주시면 더 좋은 추천을 해드릴 수 있어요. 날씨, 기분, 인원 등을 말씀해주세요.';
+    }
+    
+    return recommendations.join(' ');
+}
+
+// Enter 키로 메시지 전송
+document.getElementById('chat-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        sendMessage();
+    }
+});

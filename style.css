@@ -448,3 +448,240 @@
 .menu-image {
     position: relative;
 }
+
+/* 버튼 기본 스타일 수정 */
+button {
+    background-color: #FF6B35; /* 식감을 돋우는 주황색으로 변경 */
+    color: white;
+    border: none;
+    padding: 0.75rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #E85B2A; /* 호버 시 약간 어두운 색상 */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* 장바구니 버튼 */
+#view-cart {
+    width: 80%;
+    padding: 0.9rem;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    background-color: #4A6B8A; /* 진한 블루 계열로 변경 */
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#view-cart:hover {
+    background-color: #3D5A73;
+}
+
+/* 주문하기 버튼 */
+#order-btn {
+    width: 100%;
+    padding: 0.9rem;
+    font-size: 1.1rem;
+    background-color: #4CAF50; /* 초록색 유지 - 주문/결제와 관련된 버튼 */
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+#order-btn:hover {
+    background-color: #43A047;
+}
+
+/* 카테고리 버튼 스타일 수정 */
+.category-btn {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 0.6rem 1.2rem;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.category-btn.active {
+    background-color: #FF6B35; /* 주 테마 색상으로 통일 */
+    color: white;
+    border-color: #FF6B35;
+    box-shadow: 0 2px 5px rgba(255, 107, 53, 0.3);
+}
+
+.category-btn:hover:not(.active) {
+    background-color: #f5f5f5;
+    border-color: #ccc;
+}
+
+/* 뒤로가기 버튼 */
+.back-btn {
+    margin-top: 0.5rem;
+    background-color: transparent;
+    border: 1px solid white;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    border-radius: 4px;
+    box-shadow: none;
+}
+
+.back-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: none;
+}
+
+/* 메뉴 담기 버튼 수정 */
+.menu-details button {
+    background-color: #FF6B35;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    font-weight: normal;
+    font-size: 0.9rem;
+}
+
+/* 필터 버튼 수정 */
+.filter-btn {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.filter-btn.active {
+    background-color: #FF6B35;
+    color: white;
+    border-color: #FF6B35;
+    box-shadow: 0 2px 5px rgba(255, 107, 53, 0.3);
+}
+
+/* 리뷰 작성 버튼 */
+.write-review-btn {
+    width: 100%;
+    background-color: #4A6B8A;
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    font-weight: 500;
+}
+
+.write-review-btn:hover {
+    background-color: #3D5A73;
+}
+
+/* 결제하기 버튼 */
+#pay-button {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+#pay-button:hover {
+    background-color: #43A047;
+}
+
+/* 상세 페이지 버튼 */
+.action-buttons button {
+    padding: 0.8rem 1rem;
+    font-weight: 500;
+}
+
+.action-buttons .primary-btn {
+    background-color: #FF6B35;
+}
+
+.action-buttons .secondary-btn {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.action-buttons .secondary-btn:hover {
+    background-color: #e5e5e5;
+    border-color: #ccc;
+    transform: translateY(-2px);
+}
+
+/* 탭 메뉴 수정 */
+.tabs {
+    display: flex;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.tab {
+    flex: 1;
+    text-align: center;
+    padding: 1rem;
+    color: #666;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.tab.active {
+    color: #FF6B35;
+    border-bottom: 2px solid #FF6B35;
+    font-weight: 600;
+}
+
+.tab:hover:not(.active) {
+    color: #FF6B35;
+    background-color: rgba(255, 107, 53, 0.05);
+}
+
+/* 수량 조절 버튼 */
+.quantity-control button {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    font-size: 1.2rem;
+    line-height: 0;
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.quantity-control button:hover {
+    background-color: #e5e5e5;
+    transform: none;
+}
+
+header {
+    background-color: #4A6B8A; /* 진한 블루 계열로 변경 */
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+h1 {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}

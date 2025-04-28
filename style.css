@@ -1152,3 +1152,120 @@ footer {
         font-size: 1rem;
     }
 }
+
+/* 공지사항 형태의 챗봇 스타일 */
+.notice-container {
+    background-color: white;
+    border-radius: 12px;
+    margin: 1rem;
+    box-shadow: 0 2px 4px rgba(74, 144, 226, 0.1);
+    overflow: hidden;
+}
+
+.notice-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.notice-toggle {
+    transition: transform 0.3s ease;
+}
+
+.notice-container.collapsed .notice-toggle {
+    transform: rotate(-90deg);
+}
+
+.notice-body {
+    padding: 1rem;
+}
+
+.notice-messages {
+    margin-bottom: 1rem;
+}
+
+.notice-message {
+    background-color: #f8fbff;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.notice-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.notice-date {
+    font-weight: 500;
+}
+
+.notice-weather {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.notice-content {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--text-color);
+}
+
+.notice-input {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.notice-input input {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.notice-input input:focus {
+    border-color: var(--primary-color);
+}
+
+.notice-input button {
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+/* 데스크톱 환경에서의 공지사항 스타일 */
+@media screen and (min-width: 769px) {
+    .notice-container {
+        margin: 1.5rem;
+    }
+
+    .notice-body {
+        padding: 1.5rem;
+    }
+
+    .notice-message {
+        padding: 1.5rem;
+    }
+
+    .notice-input input {
+        padding: 1rem 1.2rem;
+        font-size: 1rem;
+    }
+
+    .notice-input button {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+    }
+}

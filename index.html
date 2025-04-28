@@ -31,6 +31,31 @@
             <button class="category-btn" data-category="drink">음료</button>
         </div>
         
+        <!-- 공지사항 형태의 챗봇 -->
+        <div class="notice-container">
+            <div class="notice-header">
+                <span>오늘의 추천 메뉴</span>
+                <span class="notice-toggle">▼</span>
+            </div>
+            <div class="notice-body">
+                <div class="notice-messages" id="notice-messages">
+                    <div class="notice-message">
+                        <div class="notice-info">
+                            <span class="notice-date"></span>
+                            <span class="notice-weather"></span>
+                        </div>
+                        <div class="notice-content">
+                            오늘의 날씨와 기분을 고려한 맞춤 메뉴를 추천해드려요.
+                        </div>
+                    </div>
+                </div>
+                <div class="notice-input">
+                    <input type="text" id="notice-input" placeholder="오늘의 날씨나 기분을 입력해주세요...">
+                    <button onclick="sendNotice()">추천받기</button>
+                </div>
+            </div>
+        </div>
+        
         <div class="menu-items" id="menu-container">
             <!-- 자바스크립트로 메뉴 아이템 추가 -->
         </div>
@@ -41,25 +66,6 @@
             장바구니 (<span id="cart-count">0</span>)
         </button>
     </footer>
-    
-    <!-- 챗봇 UI -->
-    <div class="chatbot-container">
-        <div class="chatbot-header" onclick="toggleChatbot()">
-            <span>메뉴 추천 챗봇</span>
-            <span class="chatbot-toggle">▼</span>
-        </div>
-        <div class="chatbot-body">
-            <div class="chat-messages" id="chat-messages">
-                <div class="message bot">
-                    안녕하세요! 오늘 어떤 메뉴를 찾고 계신가요? 날씨, 기분, 인원 등을 말씀해주시면 맞춤 메뉴를 추천해드릴게요.
-                </div>
-            </div>
-            <div class="chat-input">
-                <input type="text" id="chat-input" placeholder="메시지를 입력하세요...">
-                <button onclick="sendMessage()">전송</button>
-            </div>
-        </div>
-    </div>
     
     <script src="script.js"></script>
 </body>

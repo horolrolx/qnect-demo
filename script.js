@@ -113,3 +113,46 @@ function displayMenuItems(category) {
         menuContainer.appendChild(itemElement);
     });
 }
+
+// 장바구니 관련 함수들
+function addToCart(itemId) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const item = menuItems.find(item => item.id === itemId);
+    
+    if (item) {
+        const existingItem = cart.find(cartItem => cartItem.id === itemId);
+        
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cart.push({
+                id: item.id,
+                name: item.name,
+                price: item.price,
+                quantity: 1,
+                image: item.image
+            });
+        }
+        
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+        showAddToCartMessage(item.name);
+    }
+}
+
+function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    document.getElementById('cart-count').textContent = totalItems;
+}
+
+function showAddToCartMessage(itemName) {
+    const message = document.createElement('div');
+    message.className = 'add-to-cart-message';
+    message.textContent = `${itemName}이(가) 장바구니에 담겼습니다.`;
+    document.body.appendChild(message);
+    
+    setTimeout(() => {
+        message.remove();
+    }, 2000);
+}

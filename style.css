@@ -1,3 +1,20 @@
+/* 기본 색상 변수 */
+:root {
+    --primary-color: #4A90E2; /* 밝은 파랑 */
+    --secondary-color: #F5A623; /* 밝은 소라 */
+    --background-color: #F8FBFF; /* 매우 밝은 파랑 배경 */
+    --text-color: #2C3E50; /* 진한 파랑 계열 텍스트 */
+    --border-color: #E1E8ED; /* 밝은 회색 테두리 */
+    --hover-color: #357ABD; /* 호버 시 어두운 파랑 */
+    --success-color: #2ECC71; /* 성공 메시지용 초록 */
+    --error-color: #E74C3C; /* 에러 메시지용 빨강 */
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
 /* 레스토랑 배너 */
 .restaurant-banner {
     width: 100%;
@@ -29,9 +46,14 @@
 }
 
 .tab.active {
-    color: #3a86ff;
-    border-bottom: 2px solid #3a86ff;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
     font-weight: bold;
+}
+
+.tab:hover:not(.active) {
+    color: var(--primary-color);
+    background-color: rgba(74, 144, 226, 0.05);
 }
 
 /* 메뉴 상세 페이지 */
@@ -394,16 +416,16 @@
 
 .success-icon {
     font-size: 5rem;
-    color: #4caf50;
+    color: var(--success-color);
     margin: 1rem 0;
 }
 
 .info-message {
     margin: 1.5rem 0;
     padding: 1rem;
-    background-color: #f0f7ff;
+    background-color: rgba(74, 144, 226, 0.1);
     border-radius: 8px;
-    color: #3a86ff;
+    color: var(--primary-color);
 }
 
 .rating-container {
@@ -478,13 +500,13 @@ button:active {
     padding: 0.9rem;
     font-size: 1.1rem;
     border-radius: 12px;
-    background-color: #4A6B8A; /* 진한 블루 계열로 변경 */
+    background-color: var(--primary-color);
     font-weight: 600;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #view-cart:hover {
-    background-color: #3D5A73;
+    background-color: var(--hover-color);
 }
 
 /* 주문하기 버튼 */
@@ -504,7 +526,7 @@ button:active {
 /* 카테고리 버튼 스타일 수정 */
 .category-btn {
     background-color: white;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 20px;
     padding: 0.6rem 1.2rem;
     white-space: nowrap;
@@ -515,15 +537,15 @@ button:active {
 }
 
 .category-btn.active {
-    background-color: #FF6B35; /* 주 테마 색상으로 통일 */
+    background-color: var(--primary-color);
     color: white;
-    border-color: #FF6B35;
+    border-color: var(--primary-color);
     box-shadow: 0 2px 5px rgba(255, 107, 53, 0.3);
 }
 
 .category-btn:hover:not(.active) {
-    background-color: #f5f5f5;
-    border-color: #ccc;
+    background-color: rgba(74, 144, 226, 0.05);
+    border-color: var(--primary-color);
 }
 
 /* 뒤로가기 버튼 */
@@ -544,11 +566,15 @@ button:active {
 
 /* 메뉴 담기 버튼 수정 */
 .menu-details button {
-    background-color: #FF6B35;
+    background-color: var(--primary-color);
     padding: 0.6rem 1rem;
     border-radius: 6px;
     font-weight: normal;
     font-size: 0.9rem;
+}
+
+.menu-details button:hover {
+    background-color: var(--hover-color);
 }
 
 /* 필터 버튼 수정 */
@@ -571,7 +597,7 @@ button:active {
 /* 리뷰 작성 버튼 */
 .write-review-btn {
     width: 100%;
-    background-color: #4A6B8A;
+    background-color: var(--primary-color);
     color: white;
     padding: 1rem;
     border-radius: 8px;
@@ -580,13 +606,13 @@ button:active {
 }
 
 .write-review-btn:hover {
-    background-color: #3D5A73;
+    background-color: var(--hover-color);
 }
 
 /* 결제하기 버튼 */
 #pay-button {
     width: 100%;
-    background-color: #4CAF50;
+    background-color: var(--primary-color);
     color: white;
     padding: 1rem;
     border-radius: 8px;
@@ -597,7 +623,7 @@ button:active {
 }
 
 #pay-button:hover {
-    background-color: #43A047;
+    background-color: var(--hover-color);
 }
 
 /* 상세 페이지 버튼 */
@@ -607,19 +633,19 @@ button:active {
 }
 
 .action-buttons .primary-btn {
-    background-color: #FF6B35;
+    background-color: var(--primary-color);
+    color: white;
 }
 
 .action-buttons .secondary-btn {
-    background-color: #f0f0f0;
-    color: #333;
-    border: 1px solid #ddd;
+    background-color: white;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
 }
 
 .action-buttons .secondary-btn:hover {
-    background-color: #e5e5e5;
-    border-color: #ccc;
-    transform: translateY(-2px);
+    background-color: rgba(74, 144, 226, 0.05);
+    border-color: var(--primary-color);
 }
 
 /* 탭 메뉴 수정 */
@@ -642,14 +668,14 @@ button:active {
 }
 
 .tab.active {
-    color: #FF6B35;
-    border-bottom: 2px solid #FF6B35;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
     font-weight: 600;
 }
 
 .tab:hover:not(.active) {
-    color: #FF6B35;
-    background-color: rgba(255, 107, 53, 0.05);
+    color: var(--primary-color);
+    background-color: rgba(74, 144, 226, 0.05);
 }
 
 /* 수량 조절 버튼 */
@@ -659,29 +685,50 @@ button:active {
     padding: 0;
     font-size: 1.2rem;
     line-height: 0;
-    background-color: #f0f0f0;
-    color: #333;
-    border: 1px solid #ddd;
+    background-color: white;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
     border-radius: 4px;
 }
 
 .quantity-control button:hover {
-    background-color: #e5e5e5;
-    transform: none;
+    background-color: rgba(74, 144, 226, 0.05);
+    border-color: var(--primary-color);
 }
 
 header {
-    background-color: #4A6B8A; /* 진한 블루 계열로 변경 */
+    background-color: var(--primary-color);
     color: white;
     padding: 1rem;
     text-align: center;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.2);
 }
 
 h1 {
     font-weight: 600;
     letter-spacing: 0.5px;
+}
+
+/* 장바구니 메시지 */
+.add-to-cart-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(74, 144, 226, 0.9);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    z-index: 1000;
+    animation: fadeInOut 2s ease-in-out;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
 }
